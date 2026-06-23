@@ -70,17 +70,14 @@ De kritieke factor hierbij is de failoverlogica die in de firmware van de alarmc
 
 Moderne enterprise-architecturen implementeren daarom een parallelle of quasi-instantane failover-methodiek. Hierbij worden actieve TCP-sockets op beide paden opengehouden, of vindt er bij een storing op het primaire pad een sub-seconde omschakeling plaats. De alarmcentrale maakt hierbij intensief gebruik van heartbeat-bewaking (polling). Als deze pollingpakketten door een netwerkstoring wegvallen, detecteert de centrale meldkamer dit onmiddellijk. Ontbrekende heartbeat-signalen veroorzaken immers toezichtblinde vlekken en dwingen de meldkamer tot extra handmatige controles. Door directe omschakeling en lokale eventbuffering in het niet-vluchtige geheugen van de alarmcentrale wordt gegarandeerd dat er geen audit-trail verloren gaat tijdens netwerkcalamiteiten.
 
-graph TD
-    Sensors[Fysieke Sensoren / Lussen] --> EdgeNode[Athenalarm AS-9000 Alarmcentrale Edge Node]
-    
-    EdgeNode -->|Primair Pad: LAN / TCP-IP| SIA[SIA DC-09 Versleuteld]
-    EdgeNode -->|Back-up: 4G LTE Cellulair| Failover[Instant Failover Logica]
-    
-    SIA --> ARC[Centrale Meldkamer]
-    Failover --> ARC
-
-    style EdgeNode fill:#f9f,stroke:#333,stroke-width:2px
-    style ARC fill:#bbf,stroke:#333,stroke-width:2px
+[Fysieke Sensoren / Lussen]
+│
+▼
+[Athenalarm AS-9000 Alarmcentrale (Edge Node)]
+│
+├─► (Primair Pad: LAN / TCP-IP) ───► [SIA DC-09 Versleuteld] ──┐
+│                                                              ▼
+└─► (Back-up: 4G LTE Cellulair) ──► [Instant Failover Logica] ─┴─► [Centrale Meldkamer]
 
 [![Uitleg over dubbelpadcommunicatie en failover-transmissie](https://img.youtube.com/vi/cIBxzrVTb4A/0.jpg)](https://www.youtube.com/watch?v=cIBxzrVTb4A)
 
