@@ -70,14 +70,30 @@ De kritieke factor hierbij is de failoverlogica die in de firmware van de alarmc
 
 Moderne enterprise-architecturen implementeren daarom een parallelle of quasi-instantane failover-methodiek. Hierbij worden actieve TCP-sockets op beide paden opengehouden, of vindt er bij een storing op het primaire pad een sub-seconde omschakeling plaats. De alarmcentrale maakt hierbij intensief gebruik van heartbeat-bewaking (polling). Als deze pollingpakketten door een netwerkstoring wegvallen, detecteert de centrale meldkamer dit onmiddellijk. Ontbrekende heartbeat-signalen veroorzaken immers toezichtblinde vlekken en dwingen de meldkamer tot extra handmatige controles. Door directe omschakeling en lokale eventbuffering in het niet-vluchtige geheugen van de alarmcentrale wordt gegarandeerd dat er geen audit-trail verloren gaat tijdens netwerkcalamiteiten.
 
-[Fysieke Sensoren / Lussen]
-│
-▼
-[Athenalarm AS-9000 Alarmcentrale (Edge Node)]
-│
-├─► (Primair Pad: LAN / TCP-IP) ───► [SIA DC-09 Versleuteld] ──┐
-│                                                              ▼
-└─► (Back-up: 4G LTE Cellulair) ──► [Instant Failover Logica] ─┴─► [Centrale Meldkamer]
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 290" width="100%" style="background:#ffffff; border:1px solid #e4e4e7; border-radius:8px; padding:15px;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#71717a" />
+    </marker>
+  </defs>
+  <rect x="200" y="10" width="200" height="40" rx="5" fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1.5" />
+  <text x="300" y="35" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#27272a">Fysieke Sensoren / Lussen</text>
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#71717a" stroke-width="1.5" marker-end="url(#arrow)" />
+  <rect x="100" y="75" width="400" height="40" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" />
+  <text x="300" y="100" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e40af">Athenalarm AS-9000 Alarmcentrale (Edge Node)</text>
+  <path d="M 200 115 L 200 135 L 150 135 L 150 150" fill="none" stroke="#a1a1aa" stroke-width="1.5" marker-end="url(#arrow)" />
+  <path d="M 400 115 L 400 135 L 450 135 L 450 150" fill="none" stroke="#a1a1aa" stroke-width="1.5" marker-end="url(#arrow)" />
+  <text x="140" y="130" font-family="sans-serif" font-size="10" fill="#71717a" text-anchor="end">LAN / TCP-IP</text>
+  <text x="460" y="130" font-family="sans-serif" font-size="10" fill="#71717a" text-anchor="start">4G LTE Cellulair</text>
+  <rect x="45" y="155" width="210" height="40" rx="5" fill="#fef08a" stroke="#eab308" stroke-width="1.5" />
+  <text x="150" y="179" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#713f12">SIA DC-09 Versleuteld</text>
+  <rect x="345" y="155" width="210" height="40" rx="5" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5" />
+  <text x="450" y="179" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#991b1b">Instant Failover Logica</text>
+  <path d="M 150 195 L 150 215 L 285 215 L 285 230" fill="none" stroke="#a1a1aa" stroke-width="1.5" marker-end="url(#arrow)" />
+  <path d="M 450 195 L 450 215 L 315 215 L 315 230" fill="none" stroke="#a1a1aa" stroke-width="1.5" marker-end="url(#arrow)" />
+  <rect x="200" y="235" width="200" height="40" rx="5" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5" />
+  <text x="300" y="260" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#166534">Centrale Meldkamer</text>
+</svg>
 
 [![Uitleg over dubbelpadcommunicatie en failover-transmissie](https://img.youtube.com/vi/cIBxzrVTb4A/0.jpg)](https://www.youtube.com/watch?v=cIBxzrVTb4A)
 
